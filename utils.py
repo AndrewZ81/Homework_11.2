@@ -58,3 +58,19 @@ def get_by_skill(skill):
                 break
     string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
     return f"<pre>{string_of_candidates_for_output}</pre>"
+
+
+def get_by_name(name):
+    """
+    :param name: Имя для поиска
+    :return: Преформатированную строку кандидатов с данным именем
+    """
+    list_of_candidates_for_output = []
+    for i in load_candidates("candidates.json"):
+        list_of_full_name = i["name"].split(" ")
+        if name.lower() == list_of_full_name[0].lower():
+            list_of_candidates_for_output.append("Имя кандидата - " + i["name"])
+            list_of_candidates_for_output.append("Позиция кандидата - " + i["position"])
+            list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
+    string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
+    return f"<pre>{string_of_candidates_for_output}</pre>"
