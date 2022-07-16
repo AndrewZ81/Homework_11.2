@@ -1,6 +1,7 @@
 # Импортируем модуль JSON для работы с этим форматом
 import json
 
+
 def load_candidates(file_with_candidates):
     """
     :param file_with_candidates: Файл с кандидатами формата JSON

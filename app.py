@@ -4,6 +4,15 @@ import utils
 # Импортируем класс Flask
 from flask import Flask
 
+# Проверяем существование файла с кандидатами
+try:
+    file = open("candidates.json")
+except IOError:
+    print("Файл candidates.json не найден или повреждён")
+    quit()
+else:
+    file.close()
+
 # Создаём экземпляр Flask
 app = Flask(__name__)
 
