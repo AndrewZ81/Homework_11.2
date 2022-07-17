@@ -35,18 +35,17 @@ def get_by_pk(id):
 def get_by_skill(skill):
     """
     :param skill: Навык для поиска
-    :return: Преформатированную строку кандидатов с данным навыком
+    :return: Заполненный шаблон всех кандидатов с данным скиллом
     """
     list_of_candidates_for_output = []
     for i in load_candidates("candidates.json"):
         list_of_skills = i["skills"].split(", ")
         for k in list_of_skills:
             if skill.lower() == k.lower():
-                list_of_candidates_for_output.append("Имя кандидата - " + i["name"])
-                list_of_candidates_for_output.append("Позиция кандидата - " + i["position"])
-                list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
+                list_of_candidates_for_output.append(i)
                 break
-    string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
+    return render_template("skill.html", list=list_of_candidates_for_output,
+                           skill=skill.title(), _len=len(list_of_candidates_for_output))
 
 
 def get_by_name(name):
