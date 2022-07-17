@@ -17,21 +17,15 @@ def load_candidates(file_with_candidates):
 
 def get_all():
     """
-    :return: Преформатированную строку кандидатов
+    :return: Заполненный шаблон гиперссылок-имен всех кандидатов
     """
-    list_of_candidates_for_output = []
-    for i in load_candidates("candidates.json"):
-        list_of_candidates_for_output.append("Имя кандидата - " + i["name"])
-        list_of_candidates_for_output.append("Позиция кандидата - " + i["position"])
-        list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
-    string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
-    return f"<pre>{string_of_candidates_for_output}</pre>"
+    return render_template("list.html", list=load_candidates("candidates.json"))
 
 
 def get_by_pk(id):
     """
     :param id: Идентификатор (номер) кандидата
-    :return: Данные кандидата по его номеру
+    :return: Заполненный шаблон кандидата по его номеру
     """
     for i in load_candidates("candidates.json"):
         if i["pk"] == id:
