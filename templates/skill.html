@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Кандидаты с навыком {{skill}}</title>
+</head>
+<body>
+<h1>Найдено со скиллом {{skill}}: {{_len}}</h1>
+{% for i in list %}
+    <p><a href="/candidates/{{i['pk']}}">{{i['name']}}</a></p>
+{% endfor %}
+</body>
+</html>
