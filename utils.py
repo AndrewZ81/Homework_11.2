@@ -17,7 +17,7 @@ def load_candidates(file_with_candidates):
 
 def get_all():
     """
-    :return: Заполненный шаблон гиперссылок-имен всех кандидатов
+    :return: Заполненный шаблон имен всех кандидатов
     """
     return render_template("list.html", list=load_candidates("candidates.json"))
 
@@ -47,20 +47,17 @@ def get_by_skill(skill):
                 list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
                 break
     string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
-    return f"<pre>{string_of_candidates_for_output}</pre>"
 
 
 def get_by_name(name):
     """
     :param name: Имя для поиска
-    :return: Преформатированную строку кандидатов с данным именем
+    :return: Заполненный шаблон всех кандидатов с данным именем
     """
     list_of_candidates_for_output = []
     for i in load_candidates("candidates.json"):
         list_of_full_name = i["name"].split(" ")
         if name.lower() == list_of_full_name[0].lower():
-            list_of_candidates_for_output.append("Имя кандидата - " + i["name"])
-            list_of_candidates_for_output.append("Позиция кандидата - " + i["position"])
-            list_of_candidates_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
-    string_of_candidates_for_output = "\n".join(list_of_candidates_for_output)
-    return f"<pre>{string_of_candidates_for_output}</pre>"
+            list_of_candidates_for_output.append(i)
+    return render_template("search.html", list=list_of_candidates_for_output,
+                           name=list_of_full_name[0], _len=len(list_of_candidates_for_output))
