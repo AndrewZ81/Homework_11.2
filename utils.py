@@ -60,4 +60,4 @@ def get_by_name(name):
         if name.lower() == list_of_full_name[0].lower():
             list_of_candidates_for_output.append(i)
     return render_template("search.html", list=list_of_candidates_for_output,
-                           name=list_of_full_name[0], _len=len(list_of_candidates_for_output))
+                           name=name.title(), _len=len(list_of_candidates_for_output))
