@@ -1,6 +1,9 @@
 # Импортируем модуль JSON для работы с этим форматом
 import json
 
+# Импортируем рендер шаблона для создания страничек кандидатов
+from flask import render_template
+
 
 def load_candidates(file_with_candidates):
     """
@@ -30,16 +33,9 @@ def get_by_pk(id):
     :param id: Идентификатор (номер) кандидата
     :return: Данные кандидата по его номеру
     """
-    list_of_candidate_for_output = []
-    url = ""
     for i in load_candidates("candidates.json"):
         if i["pk"] == id:
-            url = i["picture"]
-            list_of_candidate_for_output.append("Имя кандидата - " + i["name"])
-            list_of_candidate_for_output.append("Позиция кандидата - " + i["position"])
-            list_of_candidate_for_output.append("Навыки кандидата -  " + i["skills"] + "\n\n")
-    string_of_candidate_for_output = "\n".join(list_of_candidate_for_output)
-    return f"<img src={url}>\n<pre>{string_of_candidate_for_output}</pre>"
+            return render_template("card.html", _dict=i)
 
 
 def get_by_skill(skill):
