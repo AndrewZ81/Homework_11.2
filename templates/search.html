@@ -5,7 +5,7 @@
     <title>Кандидаты с именем {{name}}</title>
 </head>
 <body>
-<h2>Найдено кандидатов {{_len}}</h2>
+<h1>Найдено кандидатов {{_len}}</h1>
 {% for i in list %}
     <p><a href="/candidates/{{i['pk']}}">{{i['name']}}</a></p>
 {% endfor %}
